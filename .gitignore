@@ -1,7 +1,7 @@
 .vscode
 .idea
 
-# application/dist 
-# deploy/config
-# deploy/crypto-config
+application/dist 
+deploy/config
+deploy/crypto-config
 

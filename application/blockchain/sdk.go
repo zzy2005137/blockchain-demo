@@ -8,19 +8,19 @@ import (
 
 // 配置信息
 var (
-	SDK           *fabsdk.FabricSDK          // Fabric提供的SDK
-	ChannelName   = "assetschannel"          // 通道名称
-	ChainCodeName = "blockchain-real-estate" // 链码名称
-	Org           = "org1"                   // 组织名称
-	User          = "Admin"                  // 用户
-	ConfigPath    = "conf/config.yaml"       // 配置文件路径
+	sdk           *fabsdk.FabricSDK                                 // Fabric SDK
+	configPath    = "conf/config.yaml"                              // 配置文件路径
+	channelName   = "assetschannel"                                 // 通道名称
+	user          = "Admin"                                         // 用户
+	chainCodeName = "blockchain-real-estate"                        // 链码名称
+	endpoints     = []string{"peer0.org1.blockchainrealestate.com"} // 要发送交易的节点
 )
 
 // Init 初始化
 func Init() {
 	var err error
 	// 通过配置文件初始化SDK
-	SDK, err = fabsdk.New(config.FromFile(ConfigPath))
+	sdk, err = fabsdk.New(config.FromFile(configPath))
 	if err != nil {
 		panic(err)
 	}
@@ -29,17 +29,17 @@ func Init() {
 // ChannelExecute 区块链交互
 func ChannelExecute(fcn string, args [][]byte) (channel.Response, error) {
 	// 创建客户端，表明在通道的身份
-	ctx := SDK.ChannelContext(ChannelName, fabsdk.WithOrg(Org), fabsdk.WithUser(User))
+	ctx := sdk.ChannelContext(channelName, fabsdk.WithUser(user))
 	cli, err := channel.New(ctx)
 	if err != nil {
 		return channel.Response{}, err
 	}
-	// 对区块链增删改的操作（调用了链码的invoke）
+	// 对区块链账本的写操作（调用了链码的invoke）
 	resp, err := cli.Execute(channel.Request{
-		ChaincodeID: ChainCodeName,
+		ChaincodeID: chainCodeName,
 		Fcn:         fcn,
 		Args:        args,
-	}, channel.WithTargetEndpoints("peer0.org1.blockchainrealestate.com"))
+	}, channel.WithTargetEndpoints(endpoints...))
 	if err != nil {
 		return channel.Response{}, err
 	}
@@ -50,17 +50,17 @@ func ChannelExecute(fcn string, args [][]byte) (channel.Response, error) {
 // ChannelQuery 区块链查询
 func ChannelQuery(fcn string, args [][]byte) (channel.Response, error) {
 	// 创建客户端，表明在通道的身份
-	ctx := SDK.ChannelContext(ChannelName, fabsdk.WithOrg(Org), fabsdk.WithUser(User))
+	ctx := sdk.ChannelContext(channelName, fabsdk.WithUser(user))
 	cli, err := channel.New(ctx)
 	if err != nil {
 		return channel.Response{}, err
 	}
-	// 对区块链查询的操作（调用了链码的invoke），将结果返回
+	// 对区块链账本查询的操作（调用了链码的invoke），只返回结果
 	resp, err := cli.Query(channel.Request{
-		ChaincodeID: ChainCodeName,
+		ChaincodeID: chainCodeName,
 		Fcn:         fcn,
 		Args:        args,
-	}, channel.WithTargetEndpoints("peer0.org1.blockchainrealestate.com"))
+	}, channel.WithTargetEndpoints(endpoints...))
 	if err != nil {
 		return channel.Response{}, err
 	}

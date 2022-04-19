@@ -76,21 +76,3 @@ docker exec cli0 peer chaincode invoke -C assetschannel -n blockchain-real-estat
 echo "通过peer2查询"
 docker exec cli2 peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
 
-
-#其他智能合约函数测试
-# echo "创建realEstate"
-# docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["createRealEstate","5feceb66ffc8","d4735e3a265e","50","50"]}'
-
-
-#create order
-# docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["createOrder","5feceb66ffc8","d4735e3a265e","001","toBeStarted"]}'  #管理员id, owner, orderId, status
-
-# query order 
-# docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryOrderList"]}'  
-
-#update order 
-# docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["updateOrder","d4735e3a265e","d4735e3a265e","001","inProgress"]}'
-
-#get history 
-# docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryOrderHistory","d4735e3a265e","d4735e3a265e","001"]}'
-
