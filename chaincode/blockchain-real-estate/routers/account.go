@@ -3,6 +3,7 @@ package routers
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	"github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate/lib"
@@ -11,6 +12,8 @@ import (
 
 // QueryAccountList 查询账户列表
 func QueryAccountList(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+
+	// 处理请求
 	var accountList []lib.Account
 	results, err := utils.GetStateByPartialCompositeKeys(stub, lib.AccountKey, args)
 	if err != nil {

@@ -85,6 +85,12 @@ func (t *BlockChainRealEstate) Invoke(stub shim.ChaincodeStubInterface) pb.Respo
 		return routers.UpdateOrder(stub, args)
 	case "queryOrderHistory":
 		return routers.QueryOrderHistory(stub, args)
+	case "queryOrderHistoryPrivate":
+		return routers.QueryOrderHistoryPrivate(stub, args)
+		//获取证书
+	// case "getUserCert":
+	// 	return routers.GetUserCert(stub, args)
+
 	default:
 		return shim.Error(fmt.Sprintf("没有该功能: %s", funcName))
 	}

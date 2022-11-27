@@ -40,7 +40,7 @@ func CreateOrder(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 		return shim.Error(fmt.Sprintf("查询操作人信息-反序列化出错: %s", err))
 	}
 	if account.UserName != "管理员" {
-		return shim.Error(fmt.Sprintf("操作人权限不足%s", err))
+		return shim.Error(fmt.Sprintf("ERROR : Operation failed, not Admin %s", err))
 	}
 
 	//判断订单是否存在

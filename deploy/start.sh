@@ -71,8 +71,8 @@ sleep 5
 echo "八、验证查询账户信息"
 echo "通过peer1查询"
 docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
-echo "通过peer0查询"
-docker exec cli0 peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
-echo "通过peer2查询"
-docker exec cli2 peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
+# echo "通过peer0查询"
+# docker exec cli0 peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
+# echo "通过peer2查询"
+# docker exec cli2 peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
 
