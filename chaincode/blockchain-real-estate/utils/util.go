@@ -109,4 +109,3 @@ func GetStateByPartialCompositeKeys2(stub shim.ChaincodeStubInterface, objectTyp
 	}
 	return results, nil
 }
-

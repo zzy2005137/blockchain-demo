@@ -47,9 +47,9 @@ docker exec cli2 peer channel join -b assetschannel.block
 # -v 就是版本号，就是composer的bna版本
 # -p 是目录，目录是基于cli这个docker里面的$GOPATH相对的
 echo "六、链码安装"
-docker exec cli peer chaincode install -n blockchain-real-estate -v 1.0.0 -l golang -p github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate
-docker exec cli0 peer chaincode install -n blockchain-real-estate -v 1.0.0 -l golang -p github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate
-docker exec cli2 peer chaincode install -n blockchain-real-estate -v 1.0.0 -l golang -p github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate
+docker exec cli peer chaincode install -n blockchain-manufacture -v 1.0.0 -l golang -p github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate
+docker exec cli0 peer chaincode install -n blockchain-manufacture -v 1.0.0 -l golang -p github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate
+docker exec cli2 peer chaincode install -n blockchain-manufacture -v 1.0.0 -l golang -p github.com/togettoyou/blockchain-real-estate/chaincode/blockchain-real-estate
 
 #-n 对应前文安装链码的名字 其实就是composer network start bna名字
 #-v 为版本号，相当于composer network start bna名字@版本号
@@ -62,7 +62,7 @@ fi
 if [[ "$(docker images -q hyperledger/fabric-ccenv:latest 2> /dev/null)" == "" ]]; then
   docker tag hyperledger/fabric-ccenv:1.4 hyperledger/fabric-ccenv:latest
 fi
-docker exec cli peer chaincode instantiate -o orderer.blockchainrealestate.com:7050 -C assetschannel -n blockchain-real-estate -l golang -v 1.0.0 -c '{"Args":["init"]}'
+docker exec cli peer chaincode instantiate -o orderer.blockchainrealestate.com:7050 -C assetschannel -n blockchain-manufacture -l golang -v 1.0.0 -c '{"Args":["init"]}'
 
 echo "正在等待链码实例化完成，等待5秒"
 sleep 5
@@ -70,7 +70,7 @@ sleep 5
 # 进行链码交互，验证链码是否正确安装及区块链网络能否正常工作
 echo "八、验证查询账户信息"
 echo "通过peer1查询"
-docker exec cli peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
+docker exec cli peer chaincode invoke -C assetschannel -n blockchain-manufacture -c '{"Args":["queryAccountList"]}'
 # echo "通过peer0查询"
 # docker exec cli0 peer chaincode invoke -C assetschannel -n blockchain-real-estate -c '{"Args":["queryAccountList"]}'
 # echo "通过peer2查询"

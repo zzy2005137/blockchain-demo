@@ -12,7 +12,7 @@ var (
 	configPath    = "conf/config.yaml"                              // 配置文件路径
 	channelName   = "assetschannel"                                 // 通道名称
 	user          = "Admin"                                         // 用户
-	chainCodeName = "blockchain-real-estate"                        // 链码名称
+	chainCodeName = "blockchain-manufacture"                        // 链码名称
 	endpoints     = []string{"peer0.org1.blockchainrealestate.com"} // 要发送交易的节点
 )
 
